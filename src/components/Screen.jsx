@@ -1,6 +1,6 @@
 import "../styles/screen.css";
 
-function Screen() {
-  return <div className="screen">0</div>;
+function Screen(value) {
+  return <div className="screen">{value.value}</div>;
 }
 export default Screen;
