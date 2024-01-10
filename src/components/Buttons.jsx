@@ -4,6 +4,7 @@ function Buttons(props) {
   const calcBtn = props.text;
   const className = props.clssName;
   const calNum = props.onclick;
+  let typeOfBtn = props.typeBtn;
 
   return (
     <button
