@@ -7,21 +7,31 @@ import { calcButtons } from "./utils/dummyData";
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState("");
   const [prevScreen, setPrevScreen] = useState("");
-  const [todoOp, setTodoOp] = useState("");
+  // const [todoOp, setTodoOp] = useState("");
+  const [operator, setOperator] = useState("");
 
   function changeScreenVal(val) {
     setCurrentScreen(currentScreen + val);
   }
-
-  function changeTodoOp(val) {
-    setTodoOp(val);
+  function operationClick(op) {
+    setOperator(op);
     setPrevScreen(currentScreen);
     setCurrentScreen("");
   }
 
+  function clearBtn() {
+    setCurrentScreen("");
+  }
+
+  function plsMnsBtn() {
+    setCurrentScreen(currentScreen * -1);
+  }
+
   function equalHandler() {
+    console.log("Equal handler running");
+    console.log({ operator });
     let result;
-    switch (typeOfBtn) {
+    switch (operator) {
       case "/":
         result = Number(prevScreen) / Number(currentScreen) + "";
         setCurrentScreen(result);
@@ -35,9 +45,13 @@ export default function App() {
         setCurrentScreen(result);
         break;
       case "+":
+        console.log("Case + ");
         result = Number(prevScreen) + Number(currentScreen) + "";
         setCurrentScreen(result);
         break;
+      case "%":
+        result = (Number(prevScreen) * Number(currentScreen)) / 100 + "";
+        setCurrentScreen(result);
     }
   }
 
@@ -45,13 +59,15 @@ export default function App() {
     <div className="container">
       <Screen value={currentScreen} />
       <div className="grid_buttons">
-        {calcButtons.map((btns, index) => (
+        {calcButtons.map((btn, index) => (
           <Buttons
-            text={btns}
-            clssName={btns.className}
-            typeBtn={btns.type}
+            data={btn}
             key={index}
-            onclick={changeScreenVal}
+            changeScreenVal={changeScreenVal}
+            equalHandler={equalHandler}
+            operationClick={operationClick}
+            clearBtn={clearBtn}
+            plsMnsBtn={plsMnsBtn}
           />
         ))}
       </div>

@@ -1,18 +1,40 @@
 import "../styles/buttons.css";
 
 function Buttons(props) {
-  const calcBtn = props.text;
-  const className = props.clssName;
-  const calNum = props.onclick;
-  let typeOfBtn = props.typeBtn;
+  const {
+    data,
+    changeScreenVal,
+    equalHandler,
+    operationClick,
+    clearBtn,
+    plsMnsBtn,
+  } = props;
+
+  function clickHandler() {
+    if (data.button == "=") {
+      equalHandler();
+    }
+    if (data.type == "num") {
+      changeScreenVal(data.button);
+    }
+    if (data.type == "C") {
+      clearBtn();
+    }
+    if (data.type == "op") {
+      operationClick(data.button);
+    }
+    if (data.type == "+/-") {
+      plsMnsBtn();
+    }
+  }
 
   return (
     <button
-      className={className}
-      value={calcBtn.button}
-      onClick={(event, value) => calNum(event.target.value)}
+      className={data.className}
+      value={data.button}
+      onClick={clickHandler}
     >
-      {calcBtn.button}
+      {data.button}
     </button>
   );
 }
