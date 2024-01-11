@@ -7,7 +7,6 @@ import { calcButtons } from "./utils/dummyData";
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState("");
   const [prevScreen, setPrevScreen] = useState("");
-  // const [todoOp, setTodoOp] = useState("");
   const [operator, setOperator] = useState("");
 
   function changeScreenVal(val) {
